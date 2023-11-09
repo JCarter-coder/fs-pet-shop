@@ -35,7 +35,9 @@ app.post('/pets', (req, res) => {
     console.log(req.body)
     const { age, kind, name} = req.body
     if (!name || typeof age !== 'number' || !kind) {
-        return res.status(400).send('Bad');
+        return res.status(400).send(`| Request Method | Request URL | Request Body | Response Status | Response Content-Type | Response Body ||
+        | -------------- | ----------- | ------------ | --------------- | --------------------- | ------------- || 
+        | POST | /pets | { "name": "", "age": "two", "kind": "" } | 400 | text/plain | Bad Request ||`);
     }
     fs.readFile(petsPath, 'utf8', (error, data) => {
         const pets = JSON.parse(data)
